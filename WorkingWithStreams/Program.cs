@@ -40,33 +40,62 @@ namespace WorkingWithStreams
         // запись в потоки XML 
         static void WorkWithXml()
         {
-            // определение файла для записи
-            string xmlFile = Combine(CurrentDirectory, "streams.xml");
-            // создание файловых потоков
-            FileStream xmlFileStream = File.Create(xmlFile);
-            // оборачивание файлового потока в помощник записи XML
-            // и автоматическое добавление отступов для вложенных элементов
-            XmlWriter xml = XmlWriter.Create(xmlFileStream,
-            new XmlWriterSettings { Indent = true });
-            // запись объявления XML
-            xml.WriteStartDocument();
-            // запись корневого элемента
-            xml.WriteStartElement("callsigns");
-            // перечисление строк и запись каждой в поток
-            foreach (string item in callsigns)
+            FileStream xmlFileStream = null;
+            XmlWriter xml = null;
+
+            try
             {
-                xml.WriteElementString("callsign", item);
+                // определение файла для записи
+                string xmlFile = Combine(CurrentDirectory, "streams.xml");
+
+                // создание файловых потоков
+                xmlFileStream = File.Create(xmlFile);
+
+                // оборачивание файлового потока в помощник записи XML
+                // и автоматическое добавление отступов для вложенных элементов
+                xml = XmlWriter.Create(xmlFileStream,
+                new XmlWriterSettings { Indent = true });
+
+                // запись объявления XML
+                xml.WriteStartDocument();
+                // запись корневого элемента
+                xml.WriteStartElement("callsigns");
+
+                // перечисление строк и запись каждой в поток
+                foreach (string item in callsigns)
+                {
+                    xml.WriteElementString("callsign", item);
+                }
+                // запись закрывающего корневого элемента
+                xml.WriteEndElement();
+                // закрытие помощника и потока
+                xml.Close();
+                xmlFileStream.Close();
+                // вывод содержимого файла в консоль
+                WriteLine($"{xmlFile} contains{ new FileInfo(xmlFile).Length} bytes.");
+                WriteLine(File.ReadAllText(xmlFile));
             }
-            // запись закрывающего корневого элемента
-            xml.WriteEndElement();
-            // закрытие помощника и потока
-            xml.Close();
-            xmlFileStream.Close();
-            // вывод содержимого файла в консоль
-            WriteLine($"{xmlFile} contains {new FileInfo(xmlFile).Length} bytes.");
-            WriteLine(File.ReadAllText(xmlFile));
+            catch (Exception ex)
+            {
+
+                // если путь не существует, то исключение будет перехвачено
+                WriteLine($"{ex.GetType()} says {ex.Message}");
+            }
+
+            finally
+            {
+                if (xml != null)
+                {
+                    xml.Dispose();
+                    WriteLine("The XML writer's unmanaged resources have been disposed.");
+                }
+                if (xmlFileStream != null)
+                {
+                    xmlFileStream.Dispose();
+                    WriteLine("The file stream's unmanaged resources have been disposed.");
+                }
+            }
         }
-
-
-     }
+                    
+    }
 }
