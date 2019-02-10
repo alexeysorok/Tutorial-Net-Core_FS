@@ -129,6 +129,13 @@ namespace Tutorial_Net_Core_FS
             // Метод GetTempFileName создает файл с нулевым размером и возвращает
             //его имя, готовое к использованию. А метод GetRandomFileName просто возвращает имя файла, 
             //не создавая сам файл.
+
+            // извлечение информации о файле
+            var info = new FileInfo(backupFile);
+            WriteLine($"{backupFile}:"); WriteLine($" Contains {info.Length} bytes");
+            WriteLine($" Last accessed {info.LastAccessTime}");
+            WriteLine($" Has readonly set to {info.IsReadOnly}");
+
         }
 
 
