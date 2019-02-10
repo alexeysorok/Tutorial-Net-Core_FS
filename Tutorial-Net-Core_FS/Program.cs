@@ -31,5 +31,31 @@ namespace Tutorial_Net_Core_FS
         }
         // В типе Environment реализовано много других полезных членов, в том числе
         // метод GetEnvironmentVariables, а также свойства OSVersion и ProcessorCount
+
+        // работа с дисками 
+        static void WorkWithDrives()
+        {
+            WriteLine($"|--------------------------------|------------|" +
+                      $"-------- -| --------------------| --------------------| ");
+            WriteLine($"| Name | Type | Format | Size | Free space |");
+            WriteLine($"|--------------------------------|------------|" +
+                       $"-------- -| --------------------| --------------------| ");
+foreach (DriveInfo drive in DriveInfo.GetDrives())
+            {
+                if (drive.IsReady)
+                {
+                    WriteLine($"| {drive.Name,-30} |" +
+                        $" { drive.DriveType,-10} |" +
+                        $" { drive.DriveFormat, -7} |" +
+                        $" { drive.TotalSize,18:N0} | { drive.AvailableFreeSpace,18:N0} | ");
+                }
+                else
+                {
+                    WriteLine($"| {drive.Name,-30} | {drive.DriveType,-10} |");
+                }
+            }
+            WriteLine($"|--------------------------------|------------|" +
+            $"-------- -| --------------------| --------------------| ");
+        }
     }
-}
+    }
