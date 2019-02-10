@@ -11,6 +11,7 @@ namespace Tutorial_Net_Core_FS
         static void Main(string[] args)
         {
             OutputFileSystemInfo();
+            WorkWithDrives();
         }
 
 
@@ -40,7 +41,7 @@ namespace Tutorial_Net_Core_FS
             WriteLine($"| Name | Type | Format | Size | Free space |");
             WriteLine($"|--------------------------------|------------|" +
                        $"-------- -| --------------------| --------------------| ");
-foreach (DriveInfo drive in DriveInfo.GetDrives())
+        foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
                 if (drive.IsReady)
                 {
@@ -56,6 +57,30 @@ foreach (DriveInfo drive in DriveInfo.GetDrives())
             }
             WriteLine($"|--------------------------------|------------|" +
             $"-------- -| --------------------| --------------------| ");
+        }
+
+        // работа с каталогами 
+        static void WorkWithDirectories()
+        {
+            // определение собственного пути к папке
+            string userFolder = GetFolderPath(SpecialFolder.Personal);
+            var customFolder = new string[]
+            { userFolder, "Code", "Chapter09", "NewFolder" };
+            string dir = Combine(customFolder);
+            WriteLine($"Working with: {dir}");
+            // проверка существования папки
+            WriteLine($"Does it exist? {Exists(dir)}");
+            // создание каталога
+            WriteLine("Creating it...");
+            CreateDirectory(dir);
+
+            WriteLine($"Does it exist? {Exists(dir)}");
+            Write("Confirm the directory exists, and then press ENTER: ");
+            ReadLine();
+            // удаление каталога
+            WriteLine("Deleting it...");
+            Delete(dir, recursive: true);
+            WriteLine($"Does it exist? {Exists(dir)}");
         }
     }
     }
