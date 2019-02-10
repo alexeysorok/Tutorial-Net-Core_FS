@@ -37,5 +37,36 @@ namespace WorkingWithStreams
             WriteLine(File.ReadAllText(textFile));
         }
 
-    }
+        // запись в потоки XML 
+        static void WorkWithXml()
+        {
+            // определение файла для записи
+            string xmlFile = Combine(CurrentDirectory, "streams.xml");
+            // создание файловых потоков
+            FileStream xmlFileStream = File.Create(xmlFile);
+            // оборачивание файлового потока в помощник записи XML
+            // и автоматическое добавление отступов для вложенных элементов
+            XmlWriter xml = XmlWriter.Create(xmlFileStream,
+            new XmlWriterSettings { Indent = true });
+            // запись объявления XML
+            xml.WriteStartDocument();
+            // запись корневого элемента
+            xml.WriteStartElement("callsigns");
+            // перечисление строк и запись каждой в поток
+            foreach (string item in callsigns)
+            {
+                xml.WriteElementString("callsign", item);
+            }
+            // запись закрывающего корневого элемента
+            xml.WriteEndElement();
+            // закрытие помощника и потока
+            xml.Close();
+            xmlFileStream.Close();
+            // вывод содержимого файла в консоль
+            WriteLine($"{xmlFile} contains {new FileInfo(xmlFile).Length} bytes.");
+            WriteLine(File.ReadAllText(xmlFile));
+        }
+
+
+     }
 }
