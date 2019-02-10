@@ -119,7 +119,20 @@ namespace Tutorial_Net_Core_FS
             StreamReader textReader = File.OpenText(backupFile);
             WriteLine(textReader.ReadToEnd());
             textReader.Close();
+
+            // управление путями
+            WriteLine($"File Name: {GetFileName(textFile)}");
+            WriteLine($"File Name without Extension: {GetFileNameWithoutExtension(textFile)}");
+            WriteLine($"File Extension: {GetExtension(textFile)}");
+            WriteLine($"Random File Name: {GetRandomFileName()}");
+            WriteLine($"Temporary File Name: {GetTempFileName()}");
+            // Метод GetTempFileName создает файл с нулевым размером и возвращает
+            //его имя, готовое к использованию. А метод GetRandomFileName просто возвращает имя файла, 
+            //не создавая сам файл.
         }
+
+
+
 
     }
  }
