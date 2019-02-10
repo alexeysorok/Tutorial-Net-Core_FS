@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithFileSystems", "Tutorial-Net-Core_FS\WorkingWithFileSystems.csproj", "{C1421724-6C45-4D04-875E-D4AC045AFEB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithStreams", "WorkingWithStreams\WorkingWithStreams.csproj", "{242D0BED-A7B1-43DC-A468-2B4272AAE6EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C1421724-6C45-4D04-875E-D4AC045AFEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1421724-6C45-4D04-875E-D4AC045AFEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1421724-6C45-4D04-875E-D4AC045AFEB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242D0BED-A7B1-43DC-A468-2B4272AAE6EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242D0BED-A7B1-43DC-A468-2B4272AAE6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242D0BED-A7B1-43DC-A468-2B4272AAE6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242D0BED-A7B1-43DC-A468-2B4272AAE6EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
