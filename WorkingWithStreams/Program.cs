@@ -15,7 +15,7 @@ namespace WorkingWithStreams
 
         static void Main(string[] args)
         {
-            
+
         }
 
 
@@ -96,6 +96,28 @@ namespace WorkingWithStreams
                 }
             }
         }
-                    
+
+        //Упрощение освобождения ресурсов с помощью инструкции using
+        static void WithUsingFile()
+        {
+            string path = "C:\\";
+
+            using (FileStream file2 = File.OpenWrite(Path.Combine(path, "file2.txt")))
+            {
+                using (StreamWriter writer2 = new StreamWriter(file2))
+                {
+                    try
+                    {
+                        writer2.WriteLine("Welcome, .NET Core!");
+                    }
+                    catch (Exception ex)
+                    {
+                        WriteLine($"{ex.GetType()} says {ex.Message}");
+                    }
+                } // автоматически вызывает Dispose, если объект не равен null
+            } // автоматически вызывает Dispose, если объект не равен null
+        }
+
+
     }
 }
