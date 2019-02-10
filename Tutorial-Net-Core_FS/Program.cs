@@ -82,5 +82,44 @@ namespace Tutorial_Net_Core_FS
             Delete(dir, recursive: true);
             WriteLine($"Does it exist? {Exists(dir)}");
         }
+
+        // управление файлами 
+        static void WorkWithFiles()
+        {
+            // определение пути к каталогу
+            string userFolder = GetFolderPath(SpecialFolder.Personal);
+            var customFolder = new string[]
+            { userFolder, "Code", "Chapter09", "OutputFiles" };
+            string dir = Combine(customFolder);
+            CreateDirectory(dir);
+            // определение путей к файлам
+            string textFile = Combine(dir, "Dummy.txt");
+            string backupFile = Combine(dir, "Dummy.bak");
+            WriteLine($"Working with: {textFile}");
+            // проверка существования файла
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
+            // создание текстового файла и запись текстовой строки
+            StreamWriter textWriter = File.CreateText(textFile);
+            textWriter.WriteLine("Hello, C#!");
+            textWriter.Close(); // закрытие файла и высвобождение ресурсов
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
+            // копирование файла с перезаписью (если существует)
+            File.Copy(
+            sourceFileName: textFile,
+            destFileName: backupFile,
+            overwrite: true);
+            WriteLine($"Does {backupFile} exist? {File.Exists(backupFile)}");
+            Write("Confirm the files exist, and then press ENTER: ");
+            ReadLine();
+            // удаление файла
+            File.Delete(textFile);
+            WriteLine($"Does it exist? {File.Exists(textFile)}");
+            // чтение содержимого текстового файла
+            WriteLine($"Reading contents of {backupFile}:");
+            StreamReader textReader = File.OpenText(backupFile);
+            WriteLine(textReader.ReadToEnd());
+            textReader.Close();
+        }
+
     }
-    }
+ }
